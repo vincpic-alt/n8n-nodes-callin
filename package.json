@@ -1,19 +1,19 @@
 {
-  "name": "n8n-nodes-<...>",
-  "version": "0.1.0",
-  "description": "",
+  "name": "n8n-nodes-callin",
+  "version": "1.0.0",
+  "description": "Activates an ai agent for calling purpose.",
   "keywords": [
     "n8n-community-node-package"
   ],
   "license": "MIT",
   "homepage": "",
   "author": {
-    "name": "",
-    "email": ""
+    "name": "vincpic-alt",
+    "email": "hello@callin.io"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/<...>/n8n-nodes-<...>.git"
+    "url": "https://github.com/vincpic-alt/n8n-nodes-callin.git"
   },
   "engines": {
     "node": ">=20.15"
@@ -33,15 +33,16 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "credentials": [
-      "dist/credentials/ExampleCredentialsApi.credentials.js",
-      "dist/credentials/HttpBinApi.credentials.js"
+      "dist/credentials/AiCallsCredentialsApi.credentials.js",
+      "dist/credentials/CallinCredentialsApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/ExampleNode/ExampleNode.node.js",
-      "dist/nodes/HttpBin/HttpBin.node.js"
+      "dist/nodes/Callin.io/Callin.node.js",
+      "dist/nodes/AiCalls/AiCalls.node.js"
     ]
   },
   "devDependencies": {
+    "@types/node": "^24.0.14",
     "@typescript-eslint/parser": "~8.32.0",
     "eslint": "^8.57.0",
     "eslint-plugin-n8n-nodes-base": "^1.16.3",

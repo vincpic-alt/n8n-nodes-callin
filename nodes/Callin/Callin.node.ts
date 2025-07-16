@@ -53,7 +53,7 @@ export class Callin implements INodeType {
 				type: 'string',
 				default: '',
 				placeholder: 'Enter name',
-				description: 'Full Name',
+
 				required: true
 			},
 			{
@@ -62,11 +62,11 @@ export class Callin implements INodeType {
 				type: 'string',
 				default: '',
 				placeholder: 'Enter email',
-				description: 'Email',
+
 				required: true
 			},
 			{
-				displayName: 'Agent',
+				displayName: 'Agent Name or ID',
 				name: 'agent_id',
 				type: 'options',
 				typeOptions: {
@@ -74,7 +74,7 @@ export class Callin implements INodeType {
 				},
 				default: '',
 				placeholder: 'Select an agent',
-				description: 'Select Agent',
+				description: 'Select Agent. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 				required: true
 			},
 			{
@@ -83,8 +83,7 @@ export class Callin implements INodeType {
 				type: 'string',
 				default: '',
 				placeholder: 'Enter webhook_url',
-				description: 'Webhook Url',
-				required: false
+				description: 'Webhook URL',
 			},
 		],
 	};

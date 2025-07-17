@@ -37,7 +37,7 @@
       "dist/credentials/CallinCredentialsApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/Callin.io/Callin.node.js",
+      "dist/nodes/Callin/Callin.node.js",
       "dist/nodes/AiCalls/AiCalls.node.js"
     ]
   },

@@ -7,6 +7,7 @@ import type {
 	INodeTypeDescription,
 } from 'n8n-workflow';
 import { NodeConnectionType } from 'n8n-workflow';
+import { callinFields, callinOperations } from './CallinDescription';
 
 export class Callin implements INodeType {
 	description: INodeTypeDescription = {
@@ -15,6 +16,7 @@ export class Callin implements INodeType {
 		icon: { light: 'file:Callin.io.svg', dark: 'file:Callin.io.svg' },
 		group: ['action'],
 		version: 1,
+		subtitle: '={{ $parameter["operation"] + ": " + $parameter["resource"] }}',
 		description: 'Activates an agent for calling purpose.',
 		defaults: {
 			name: 'Callin.io',
@@ -40,64 +42,80 @@ export class Callin implements INodeType {
 			// Node properties which the user gets displayed and
 			// can change on the node.
 			{
-				displayName: 'Phone',
-				name: 'phone',
-				type: 'string',
-				default: '',
-				placeholder: 'Enter phone number',
-				description: 'Phone Number',
-				required: true
-			},
-			{
-				displayName: 'Agent Name or ID',
-				name: 'agent_id',
-				type: 'options',
-				typeOptions: {
-					loadOptionsMethod: 'getAgents',
-				},
-				default: '',
-				placeholder: 'Select an agent',
-				description: 'Select Agent. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
-				required: true
-			},
-			{
-				displayName: 'Webhook Url(optional)',
-				name: 'n8n_webhook',
-				type: 'string',
-				default: '',
-				placeholder: 'Enter webhook_url',
-				description: 'Webhook URL',
-			},
-			{
-  				displayName: 'Additional Fields',
-  				name: 'additionalFields',
-  				type: 'fixedCollection',
-  				default: {},
-  				placeholder: 'Add Field',
-  				typeOptions: {
-   					multipleValues: true,
-  				},
-  				options: [
-    				{
-      					name: 'property',
-      					displayName: 'Property',
-      					values: [
-        					{
-          						displayName: 'Field Name',
-          						name: 'fieldName',
-          						type: 'string',
-          						default: '',
-        					},
-        					{
-          						displayName: 'Field Value',
-          						name: 'fieldValue',
-          						type: 'string',
-          						default: '',
-        					},
-      					],
-    				},
-  				],
-			}		
+							displayName: 'Resource',
+							name: 'resource',
+							type: 'options',
+							noDataExpression: true,
+							options: [
+								{
+									name: 'Callin',
+									value: 'callin',
+								},
+							],
+							default: 'callin',
+						},
+			
+						...callinOperations,
+						...callinFields
+			// {
+			// 	displayName: 'Phone',
+			// 	name: 'phone',
+			// 	type: 'string',
+			// 	default: '',
+			// 	placeholder: 'Enter phone number',
+			// 	description: 'Phone Number',
+			// 	required: true
+			// },
+			// {
+			// 	displayName: 'Agent Name or ID',
+			// 	name: 'agent_id',
+			// 	type: 'options',
+			// 	typeOptions: {
+			// 		loadOptionsMethod: 'getAgents',
+			// 	},
+			// 	default: '',
+			// 	placeholder: 'Select an agent',
+			// 	description: 'Select Agent. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
+			// 	required: true
+			// },
+			// {
+			// 	displayName: 'Webhook Url(optional)',
+			// 	name: 'n8n_webhook',
+			// 	type: 'string',
+			// 	default: '',
+			// 	placeholder: 'Enter webhook_url',
+			// 	description: 'Webhook URL',
+			// },
+			// {
+  			// 	displayName: 'Additional Fields',
+  			// 	name: 'additionalFields',
+  			// 	type: 'fixedCollection',
+  			// 	default: {},
+  			// 	placeholder: 'Add Field',
+  			// 	typeOptions: {
+   			// 		multipleValues: true,
+  			// 	},
+  			// 	options: [
+    		// 		{
+      		// 			name: 'property',
+      		// 			displayName: 'Property',
+      		// 			values: [
+        	// 				{
+          	// 					displayName: 'Field Name',
+          	// 					name: 'fieldName',
+          	// 					type: 'string',
+          	// 					default: '',
+        	// 				},
+        	// 				{
+          	// 					displayName: 'Field Value',
+          	// 					name: 'fieldValue',
+          	// 					type: 'string',
+          	// 					default: '',
+        	// 				},
+      		// 			],
+    		// 		},
+  			// 	],
+			// }		
 		],
 	};
 

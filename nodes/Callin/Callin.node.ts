@@ -1,4 +1,5 @@
 import type {
+	IDataObject,
 	IExecuteFunctions,
 	ILoadOptionsFunctions,
 	INodeExecutionData,
@@ -28,8 +29,8 @@ export class Callin implements INodeType {
 			},
 		],
 		requestDefaults: {
-			baseURL: 'https://callin-web-api-test.callin.io/api/v1',
-			url: 'n8n/user-details',
+			baseURL: process.env.BASE_URL,
+			url: '/user-details',
 			headers: {
 				'Accept': 'application/json',
 				'Content-Type': 'application/json',			
@@ -45,24 +46,6 @@ export class Callin implements INodeType {
 				default: '',
 				placeholder: 'Enter phone number',
 				description: 'Phone Number',
-				required: true
-			},
-			{
-				displayName: 'Full Name',
-				name: 'full_name',
-				type: 'string',
-				default: '',
-				placeholder: 'Enter name',
-
-				required: true
-			},
-			{
-				displayName: 'Email',
-				name: 'email',
-				type: 'string',
-				default: '',
-				placeholder: 'Enter email',
-
 				required: true
 			},
 			{
@@ -85,6 +68,36 @@ export class Callin implements INodeType {
 				placeholder: 'Enter webhook_url',
 				description: 'Webhook URL',
 			},
+			{
+  				displayName: 'Additional Fields',
+  				name: 'additionalFields',
+  				type: 'fixedCollection',
+  				default: {},
+  				placeholder: 'Add Field',
+  				typeOptions: {
+   					multipleValues: true,
+  				},
+  				options: [
+    				{
+      					name: 'property',
+      					displayName: 'Property',
+      					values: [
+        					{
+          						displayName: 'Field Name',
+          						name: 'fieldName',
+          						type: 'string',
+          						default: '',
+        					},
+        					{
+          						displayName: 'Field Value',
+          						name: 'fieldValue',
+          						type: 'string',
+          						default: '',
+        					},
+      					],
+    				},
+  				],
+			}		
 		],
 	};
 
@@ -94,7 +107,7 @@ export class Callin implements INodeType {
 				const credentials = await this.getCredentials('callinApi')
 				const { data } = await this.helpers.request({
 					method: 'GET',
-					url: 'https://callin-web-api-test.callin.io/api/v1/n8n/userAgents',
+					url: `${process.env.BASE_URL}/userAgents`,
 					headers: {
 						'authorization': `Bearer ${credentials.api_key}`,
 						'Accept': 'application/json',
@@ -124,23 +137,29 @@ export class Callin implements INodeType {
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
 
 	const phone = this.getNodeParameter('phone', 0) as string;
-	const fullName = this.getNodeParameter('full_name', 0) as string;
-	const email = this.getNodeParameter('email', 0) as string;
 	const agentId = this.getNodeParameter('agent_id', 0) as string;
 	const webhookUrl = this.getNodeParameter('n8n_webhook', 0) as string;
 
+	const customFields = this.getNodeParameter('additionalFields', 0) as IDataObject;
+
+	const output: IDataObject = {};
+		if (Array.isArray(customFields.property)) {
+  			for (const item of customFields.property) {
+    		output[item.fieldName as string] = item.fieldValue;
+  		}
+	}
+
 	const body = {
 		phone,
-		full_name: fullName,
-		email,
 		agent_id: agentId,
 		n8n_webhook: webhookUrl,
+		dynamic_data: output
 	};
 
 	const credentials = await this.getCredentials('callinApi')
 	const response = await this.helpers.request({
 		method: 'POST',
-		url: 'https://callin-web-api-test.callin.io/api/v1/n8n/webhook',
+		url: `${process.env.BASE_URL}/webhook`,
 		headers: {
 			'authorization': `Bearer ${credentials.api_key}`,
 			'Accept': 'application/json',

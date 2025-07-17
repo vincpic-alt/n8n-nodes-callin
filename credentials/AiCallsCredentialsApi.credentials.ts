@@ -41,8 +41,8 @@ export class AiCallsCredentialsApi implements ICredentialType {
 	// The block below tells how this credential can be tested
 	test: ICredentialTestRequest = {
 		request: {
-			baseURL: 'https://callin-web-api-test.callin.io/api/v1',
-			url: 'n8n/user-details',
+			baseURL: process.env.BASE_URL,
+			url: '/user-details',
 		},
 	};
 }

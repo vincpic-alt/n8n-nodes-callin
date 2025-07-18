@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-callin",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Activates an ai agent for calling purpose.",
   "keywords": [
     "n8n-community-node-package"
@@ -38,7 +38,9 @@
     ],
     "nodes": [
       "dist/nodes/Callin/Callin.node.js",
-      "dist/nodes/AiCalls/AiCalls.node.js"
+      "dist/nodes/AiCalls/AiCalls.node.js",
+      "dist/nodes/Callin/CallinTranscription.node.js",
+      "dist/nodes/AiCalls/AiCallsTranscription.node.js"
     ]
   },
   "devDependencies": {
@@ -54,6 +56,7 @@
     "n8n-workflow": "*"
   },
   "dependencies": {
-    "dotenv": "^17.2.0"
+    "dotenv": "^17.2.0",
+    "uuid": "^11.1.0"
   }
 }

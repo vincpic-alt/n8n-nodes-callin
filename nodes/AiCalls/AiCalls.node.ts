@@ -96,6 +96,8 @@ export class AiCalls implements INodeType {
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
 
 	const phone = this.getNodeParameter('phone', 0) as string;
+	const full_name = this.getNodeParameter('full_name', 0) as string;
+	const email = this.getNodeParameter('email', 0) as string;
 	const agentId = this.getNodeParameter('agent_id', 0) as string;
 	const webhookUrl = this.getNodeParameter('n8n_webhook', 0) as string;
 
@@ -110,6 +112,8 @@ export class AiCalls implements INodeType {
 
 	const body = {
 		phone,
+		full_name,
+		email,
 		agent_id: agentId,
 		n8n_webhook: webhookUrl,
 		dynamic_data: output

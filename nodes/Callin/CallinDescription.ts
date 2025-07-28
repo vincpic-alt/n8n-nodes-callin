@@ -44,6 +44,22 @@ const callOperation: INodeProperties[] = [
 				required: true
 			},
 			{
+				displayName: 'Name',
+				name: 'full_name',
+				type: 'string',
+				default: '',
+				placeholder: 'Enter name',
+
+			},
+			{
+				displayName: 'Email',
+				name: 'email',
+				type: 'string',
+				default: '',
+				placeholder: 'Enter email',
+
+			},
+			{
 				displayName: 'Agent Name or ID',
 				name: 'agent_id',
 				type: 'options',

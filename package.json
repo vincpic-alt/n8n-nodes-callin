@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-callin",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Activates an ai agent for calling purpose.",
   "keywords": [
     "n8n-community-node-package",

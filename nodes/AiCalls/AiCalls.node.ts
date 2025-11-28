@@ -9,6 +9,8 @@ import type {
 import { NodeConnectionType } from 'n8n-workflow';
 import { aiCallsFields, aiCallsOperations } from './AiCallsDescription';
 
+const baseURL = 'https://api.callin.io/api/v1/n8n';
+
 export class AiCalls implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'AI Calls',
@@ -31,7 +33,7 @@ export class AiCalls implements INodeType {
 			},
 		],
 		requestDefaults: {
-			baseURL: process.env.BASE_URL,
+			baseURL: baseURL,
 			url: '/user-details',
 			headers: {
 				'Accept': 'application/json',
@@ -66,7 +68,7 @@ export class AiCalls implements INodeType {
 				const credentials = await this.getCredentials('aiCallsApi')
 				const { data } = await this.helpers.request({
 					method: 'GET',
-					url: `${process.env.BASE_URL}/userAgents`,
+					url: `${baseURL}/userAgents`,
 					headers: {
 						'authorization': `Bearer ${credentials.api_key}`,
 						'Accept': 'application/json',
@@ -122,7 +124,7 @@ export class AiCalls implements INodeType {
 	const credentials = await this.getCredentials('aiCallsApi')
 	const response = await this.helpers.request({
 		method: 'POST',
-		url: `${process.env.BASE_URL}/webhook`,
+		url: `${baseURL}/webhook`,
 		headers: {
 			'authorization': `Bearer ${credentials.api_key}`,
 			'Accept': 'application/json',

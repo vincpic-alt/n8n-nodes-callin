@@ -5,6 +5,8 @@ import {
 	INodeProperties,
 } from 'n8n-workflow';
 
+const baseURL = 'https://api.callin.io/api/v1/n8n';
+
 export class CallinCredentialsApi implements ICredentialType {
 	name = 'callinApi';
 	displayName = 'Callin API';
@@ -41,7 +43,7 @@ export class CallinCredentialsApi implements ICredentialType {
 	// The block below tells how this credential can be tested
 	test: ICredentialTestRequest = {
 		request: {
-			baseURL: process.env.BASE_URL,
+			baseURL: baseURL,
 			url: '/user-details',
 		},
 	};

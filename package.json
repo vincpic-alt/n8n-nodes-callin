@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-callin",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Activates an ai agent for calling purpose.",
   "keywords": [
     "n8n-community-node-package",
@@ -59,8 +59,5 @@
   },
   "peerDependencies": {
     "n8n-workflow": "*"
-  },
-  "dependencies": {
-    "uuid": "^11.1.0"
   }
 }

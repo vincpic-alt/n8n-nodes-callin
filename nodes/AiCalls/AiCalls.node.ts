@@ -66,7 +66,7 @@ export class AiCalls implements INodeType {
 		loadOptions: {
 			async getAgents(this: ILoadOptionsFunctions) {
 				const credentials = await this.getCredentials('aiCallsApi')
-				const { data } = await this.helpers.request({
+				const { data } = await this.helpers.httpRequest({
 					method: 'GET',
 					url: `${baseURL}/userAgents`,
 					headers: {
@@ -122,7 +122,7 @@ export class AiCalls implements INodeType {
 	};
 
 	const credentials = await this.getCredentials('aiCallsApi')
-	const response = await this.helpers.request({
+	const response = await this.helpers.httpRequest({
 		method: 'POST',
 		url: `${baseURL}/webhook`,
 		headers: {

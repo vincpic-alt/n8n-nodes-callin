@@ -7,7 +7,7 @@ import {
     NodeConnectionType,
 } from 'n8n-workflow';
 
-import { v4 as uuidv4 } from 'uuid';
+import crypto from 'crypto';
 
 export class CallinTranscription implements INodeType {
 	description: INodeTypeDescription = {
@@ -57,7 +57,7 @@ export class CallinTranscription implements INodeType {
 				const staticData = this.getWorkflowStaticData('node');
 
 				if (!staticData.randomWebhookPath) {
-					staticData.randomWebhookPath = uuidv4();
+					staticData.randomWebhookPath = crypto.randomUUID();
 				}
 
 				// DO NOT return { path: ... } — just return true

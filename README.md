@@ -22,7 +22,7 @@ To use this node, you need to have an [callin](https://callin.io) account and se
 
 ## Compatibility
 
-1.0.5
+1.0.6 and above
 
 ## Resources
 
